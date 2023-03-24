@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample</title>
+</head>
+<body>
+<h1>Index</h1>
+<script>
+    function hello(getName, name) {
+    document.write('<p>こんにちは、' + getName(name) + 'さん！</p>')
+    }
+
+    hello((name)=>{ return '<b>' + name + '</b>'; }, 'たろう')
+    hello((name)=>'<<<' + name + '>>>', '花子') // 値を返すだけのアロー関数は{}もreturnも不要
+
+    const ob = {
+      red:255, green:255, blue:0,
+
+      print: function () { // メソッド
+          document.write('<p>RED: ' + this.red + '</p>')
+          document.write('<p>RED: ' + this.green + '</p>')
+          document.write('<p>RED: ' + this.blue + '</p>')
+      },
+
+      anotherPrint() { // このような書き方もできる
+          document.write('<p>RED: ' + this.red + '</p>')
+          document.write('<p>RED: ' + this.green + '</p>')
+          document.write('<p>RED: ' + this.blue + '</p>')
+      }
+    }
+
+    document.write('<p>RED: ' + ob.red + '</p>')
+    ob.print()
+    ob.anotherPrint()
+
+    class MyObj {
+        constructor(r, g, b) {
+            this.red = r
+            this.green = g
+            this.blue = b
+        }
+
+        get hex() {
+            return '#' + ('00' + this.red.toString(16)).substr(-2)
+                + ('00' + this.blue.toString(16)).substr(-2)
+                + ('00' + this.green.toString(16)).substr(-2)
+        }
+
+        get startP() {
+            return '<p style="background-color:' + this.hex + '">'
+        }
+
+        get endP() {
+            return '</p>'
+        }
+
+        print() {
+            document.write(this.startP)
+            document.write('RED:' + this.red + '<br/>')
+            document.write('GREED:' + this.green + '<br/>')
+            document.write('BLUE:' + this.blue + '<br/>')
+            document.write(this.endP)
+        }
+    };
+
+    let ob1 = new MyObj(255, 200, 200)
+    ob1.print()
+
+    let ob2 = new MyObj(0, 150, 200)
+    ob2.print()
+</script>
+</body>
+</html>
